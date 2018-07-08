@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    service: nfs-client 
+  name: nfs-client
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: nfs
+    spec:
+      containers:
+      - args:
+        image: ubuntu:latest
+#        securityContext:
+#          privileged: true
+#        env:
+#        - name: NFS_EXPORT_0
+#          value: "/nfs 10.0.0.0/8(rw,no_subtree_check)"
+        name: nfs
+        resources: {}
+        volumeMounts:
+        - mountPath: /nfs
+          name: nfs
+      hostname: nfs
+      restartPolicy: Always
+      volumes:
+      - name: nfs
+        persistentVolumeClaim:
+          claimName: nfs-volume
+status: {}

@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    service: nfs 
+  name: nfs
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: nfs
+    spec:
+      containers:
+      - args:
+        - nfs-server
+        image: willthelaw/docker-nfs-server:latest
+        securityContext:
+          privileged: true
+        env:
+        - name: NFS_EXPORT_0
+          value: "/nfs 10.0.0.0/8(rw,no_subtree_check)"
+        name: nfs
+        resources: {}
+        volumeMounts:
+        - mountPath: /nfs
+          name: nfs
+      hostname: nfs
+      restartPolicy: Always
+      volumes:
+      - name: nfs
+        persistentVolumeClaim:
+          claimName: nfs
+status: {}

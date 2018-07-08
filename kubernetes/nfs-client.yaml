@@ -1,0 +1,28 @@
+# This pod mounts the nfs volume claim into /usr/share/nginx/html and
+# serves a simple web page.
+
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: nfs-client
+spec:
+  replicas: 1
+  selector:
+    service:nfs-client
+  template:
+    metadata:
+      labels:
+        role: nfs-client
+    spec:
+      containers:
+      - name: web
+        image: ubuntu:latest
+        volumeMounts:
+        - mountPath: /nfs
+          name: nfs
+      hostname: nfs-client
+      restartPolicy: Always
+      volumes:
+      - name: nfs
+        persistentVolumeClaim:
+          claimName: nfs
