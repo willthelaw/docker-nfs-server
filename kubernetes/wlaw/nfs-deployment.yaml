@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    service: wlaw-nfs 
+  name: wlaw-nfs
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: nfs
+    spec:
+      containers:
+      - args:
+        - nfs-server
+        image: willthelaw/docker-nfs-server:latest
+        securityContext:
+          privileged: true
+        env:
+        - name: NFS_EXPORT_0
+          value: "/nfs/data 10.0.0.0/8(rw,no_subtree_check)"
+        name: nfs
+        resources: {}
+        volumeMounts:
+        - mountPath: /nfs
+          name: wlaw-nfs
+        - mountPath: /var/lib/extrausers
+          name: extra-users
+      hostname: wlaw-nfs
+      restartPolicy: Always
+      volumes:
+      - name: wlaw-nfs
+        persistentVolumeClaim:
+          claimName: nfs-wlaw
+      - name: extra-users
+        configMap:
+          name: extrausers
+          defaultMode: 0555
+status: {}

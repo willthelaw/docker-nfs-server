@@ -1,1 +1,4 @@
 /.idea/
+*.swp
+etc
+kubernetes/wlaw
