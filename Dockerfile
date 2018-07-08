@@ -24,9 +24,9 @@ RUN mkdir -p /var/lib/nfs/rpc_pipefs && \
 EXPOSE 2049
 
 #enable extra users files for /etc/{passwd,shadow,group}
-COPY ./nsswitch.conf /etc/nsswitch.conf
+#COPY ./nsswitch.conf /etc/nsswitch.conf
 
-COPY ./idmapd.conf /etc/idmapd.conf
+#COPY ./idmapd.conf /etc/idmapd.conf
 
 # setup entrypoint
 COPY ./entrypoint.sh /usr/local/bin
