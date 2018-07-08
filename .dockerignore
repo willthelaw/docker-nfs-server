@@ -1,4 +1,4 @@
-*
+#*
 !nsswitch.conf
 !idmapd.conf
 !entrypoint.sh
