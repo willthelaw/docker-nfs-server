@@ -19,7 +19,7 @@ spec:
       containers:
       - args:
         - nfs-server
-        image: willthelaw/docker-nfs-server:latest
+        image: willthelaw/docker-nfs-server:develop
         securityContext:
           privileged: true
         env:
