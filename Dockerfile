@@ -1,5 +1,5 @@
 # Alpine can only be used if/when this bug is fixed: https://bugs.alpinelinux.org/issues/8470
-ARG BUILD_FROM=ubuntu:16.04
+ARG BUILD_FROM=ubuntu:18.04
 #debian:stretch-slim
 
 FROM $BUILD_FROM
@@ -28,7 +28,7 @@ EXPOSE 2049
 #enable extra users files for /etc/{passwd,shadow,group}
 COPY ./nsswitch.conf /etc/nsswitch.conf
 
-COPY ./idmapd.conf /etc/idmapd.conf
+#COPY ./idmapd.conf /etc/idmapd.conf
 
 # setup entrypoint
 COPY ./entrypoint.sh /usr/local/bin

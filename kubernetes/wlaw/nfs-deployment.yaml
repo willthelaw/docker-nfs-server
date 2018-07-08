@@ -24,7 +24,7 @@ spec:
           privileged: true
         env:
         - name: NFS_EXPORT_0
-          value: "/nfs/data 10.0.0.0/8(rw,no_subtree_check)"
+          value: "/nfs/data 10.0.0.0/8(rw,fsid=0,async)"
         - name: NFS_DISABLE_VERSION_3
           value: "1"
         name: nfs
