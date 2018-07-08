@@ -9,6 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # kmod is needed for lsmod, and libcap2-bin is needed for confirming Linux capabilities
 RUN apt-get update                                                                && \
+    apt-get -y dist-upgrade && \
     apt-get install -y --no-install-recommends zfsutils-linux nfs-kernel-server kmod libcap2-bin && \
     apt-get clean
 
