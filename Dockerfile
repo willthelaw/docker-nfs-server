@@ -9,13 +9,11 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # kmod is needed for lsmod, and libcap2-bin is needed for confirming Linux capabilities
 RUN apt-get update                                                                && \
-    apt-get install -y --no-install-recommends zfsutils-linux libnss-extrausers nfs-kernel-server kmod libcap2-bin && \
-    apt-get clean                                                                 && \
-    rm -rf /var/lib/apt/lists                                                     
-                                                                                     
-    # remove the default idmapd.conf
-    #rm -v /etc/idmapd.conf
+    apt-get install -y --no-install-recommends zfsutils-linux nfs-kernel-server kmod libcap2-bin && \
+    apt-get clean
 
+RUN apt-get install -y libnss-extrausers                                             
+                                                                                     
 # http://wiki.linux-nfs.org/wiki/index.php/Nfsv4_configuration
 RUN mkdir -p /var/lib/nfs/rpc_pipefs && \
     mkdir -p /var/lib/nfs/v4recovery && \
