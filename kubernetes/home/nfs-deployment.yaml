@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    service: home-nfs 
+  name: home-nfs
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: nfs
+    spec:
+      containers:
+      - args:
+        - nfs-server
+        image: willthelaw/docker-nfs-server:develop
+        securityContext:
+          privileged: true
+        env:
+        - name: NFS_DISABLE_VERSION_3
+          value: "1"
+        name: nfs
+        resources: {}
+        command: ["sleep"]
+        args: ["500000"]
+        volumeMounts:
+        - mountPath: /var/lib/extrausers
+          name: extra-users
+        - mountPath: /etc/exports
+          subPath: exports
+          name: home-exports
+        - mountPath: /nfs
+          name: home-nfs
+      hostname: home-nfs
+      restartPolicy: Always
+      volumes:
+      - name: extra-users
+        configMap:
+          name: extrausers
+          defaultMode: 0555
+      - name: home-exports
+        configMap:
+          name: home-exports
+          defaultMode: 0555
+      - name: home-nfs
+        persistentVolumeClaim:
+          claimName: home-nfs
+status: {}

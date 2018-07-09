@@ -1,5 +1,5 @@
 # Alpine can only be used if/when this bug is fixed: https://bugs.alpinelinux.org/issues/8470
-ARG BUILD_FROM=ubuntu:18.04
+ARG BUILD_FROM=ubuntu:16.04
 #debian:stretch-slim
 
 FROM $BUILD_FROM
@@ -13,7 +13,7 @@ RUN apt-get update                                                              
     apt-get install -y --no-install-recommends zfsutils-linux nfs-kernel-server kmod libcap2-bin && \
     apt-get clean
 
-RUN apt-get install -y libnss-extrausers                                             
+RUN apt-get install -y libnss-extrausers keyutils                                          
                                                                                      
 # http://wiki.linux-nfs.org/wiki/index.php/Nfsv4_configuration
 RUN mkdir -p /var/lib/nfs/rpc_pipefs && \
