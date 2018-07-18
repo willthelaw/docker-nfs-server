@@ -10,7 +10,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # kmod is needed for lsmod, and libcap2-bin is needed for confirming Linux capabilities
 RUN apt-get update                                                                && \
     apt-get -y dist-upgrade && \
-    apt-get install -y --no-install-recommends zfsutils-linux nfs-kernel-server kmod libcap2-bin
+    apt-get install -y --no-install-recommends net-toolsl dnsutils nfs-kernel-server kmod libcap2-bin
 
 RUN apt-get install -y libnss-extrausers keyutils && apt-get clean                                          
                                                                                      
@@ -28,6 +28,10 @@ EXPOSE 2049
 COPY ./nsswitch.conf /etc/nsswitch.conf
 
 COPY ./idmapd.conf /etc/idmapd.conf
+
+COPY ./nfs-common /etc/default/nfs-common
+
+COPY ./nfs-kernel-server /etc/default/nfs-kernel-server
 
 # setup entrypoint
 COPY ./docker-entrypoint.sh /usr/local/bin

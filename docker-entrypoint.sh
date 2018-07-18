@@ -9,4 +9,4 @@ rpcbind
 rpc.statd
 rpc.nfsd
 
-exec rpc.mountd --foreground
+exec rpc.mountd --foreground --port 32767
