@@ -12,12 +12,13 @@ RUN apt-get update                                                              
     apt-get -y dist-upgrade && \
 	    apt-get install -y --no-install-recommends net-tools dnsutils nfs-kernel-server kmod libcap2-bin
 
-RUN apt-get install -y libnss-extrausers keyutils && apt-get clean                                          
+RUN apt-get install -y libnss-extrausers keyutils screen vim && apt-get clean                                          
                                                                                      
 # http://wiki.linux-nfs.org/wiki/index.php/Nfsv4_configuration
 RUN mkdir -p /var/lib/nfs/rpc_pipefs && \
     echo "rpc_pipefs  /var/lib/nfs/rpc_pipefs  rpc_pipefs  defaults  0  0" >> /etc/fstab && \
     echo "nfsd        /proc/fs/nfsd            nfsd        defaults  0  0" >> /etc/fstab
+
 #RUN rmdir  /var/lib/nfs/v4recovery && \
 #    ln -s /nfs/v4recovery /var/lib/nfs/v4recovery
 
@@ -27,11 +28,15 @@ EXPOSE 2049
 #enable extra users files for /etc/{passwd,shadow,group}
 COPY ./nsswitch.conf /etc/nsswitch.conf
 
+#COPY ./nlm.conf /etc/modprobe.d
+
 COPY ./idmapd.conf /etc/idmapd.conf
 
 COPY ./nfs-common /etc/default/nfs-common
 
 COPY ./nfs-kernel-server /etc/default/nfs-kernel-server
+
+COPY ./exports /etc/exports
 
 # setup entrypoint
 COPY ./docker-entrypoint.sh /usr/local/bin

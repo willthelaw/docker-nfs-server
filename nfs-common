@@ -10,7 +10,8 @@
 #   For more information, see rpc.statd(8) or http://wiki.debian.org/SecuringNFS
 STATDOPTS="--port 32765 --outgoing-port 32766"
 
-NEED_IDMAPD=yes
+NEED_IDMAPD=no
+#yes
 
 # Do you want to start the gssd daemon? It is required for Kerberos mounts.
 NEED_GSSD=no
