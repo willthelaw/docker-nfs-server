@@ -2,8 +2,21 @@
 
 set -eu
 
-#create referal directories
-
+#get nfsdirs to create from exports
+nfslinks=`cut -f1 -d" " < /etc/exports | grep nfs | xargs`
+for i in $nfslinks; do
+	if [ "$i" != "/nfs/data" ]; then
+		if [ ! -d $i ]; then
+			echo "making directory"
+			mkdir $i
+			echo "bind mounting directory"
+			mount -v -o bind $i $i
+		else
+			echo "bind mounting directory"
+			mount -v -o bind $i $i
+		fi
+	fi
+done
 
 
 mount -av
