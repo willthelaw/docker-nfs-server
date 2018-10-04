@@ -1,9 +1,0 @@
-/nfs/data       *(rw,root_squash,sync,wdelay,no_subtree_check,fsid=0)
-#/nfs/data/pi
-/share/data/pi/lhofmann  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.144)
-/share/data/pi/ruthm  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.158)
-/share/data/pi/nigam  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.184)
-/share/data/pi/mrcullen  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.247)
-#/share/data/sw
-/nfs/data/sw/open  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.216)
-/nfs/data/sw/restricted  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.108)

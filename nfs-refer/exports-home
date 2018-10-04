@@ -1,5 +1,0 @@
-/nfs/data   *(rw,root_squash,sync,wdelay,no_subtree_check,fsid=0)
-/nfs/data/cdoane  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.69)
-/nfs/data/wlaw  *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.175)
-/nfs/data/vmeau *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.226)
-/nfs/data/neals *(rw,root_squash,async,wdelay,no_subtree_check,fsid=0,refer=/@10.152.183.254)
