@@ -1,8 +1,7 @@
 # Alpine can only be used if/when this bug is fixed: https://bugs.alpinelinux.org/issues/8470
-ARG BUILD_FROM=ubuntu:18.04
 #debian:stretch-slim
 
-FROM $BUILD_FROM
+FROM ubuntu:18.04
 
 # https://github.com/ehough/docker-nfs-server/pull/3#issuecomment-387880692
 ARG DEBIAN_FRONTEND=noninteractive
@@ -43,7 +42,7 @@ COPY ./exports /etc/exports
 ENV TINI_VERSION v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
 RUN chmod +x /sbin/tini
-ENTRYPOINT ["/tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 
 # setup entrypoint
 COPY ./docker-entrypoint.sh /usr/local/bin
