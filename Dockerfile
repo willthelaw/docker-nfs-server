@@ -37,14 +37,13 @@ COPY ./nfs-kernel-server /etc/default/nfs-kernel-server
 
 COPY ./exports /etc/exports
 
-#add in tini
 # Add Tini
-ENV TINI_VERSION v0.18.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
-RUN chmod +x /sbin/tini
-ENTRYPOINT ["/sbin/tini", "--"]
+#ENV TINI_VERSION v0.18.0
+#ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
+#RUN chmod +x /sbin/tini
+#ENTRYPOINT ["/sbin/tini", "--"]
 
 # setup entrypoint
 COPY ./docker-entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-CMD ["/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
