@@ -3,7 +3,7 @@
 set -eu
 
 #get nfsdirs to create from exports
-nfslinks=`cut -f1 -d" " < /etc/exports | grep nfs | xargs`
+nfslinks=`cut -f1 -d" " < /etc/exports.d/nfs.exports | grep nfs | xargs`
 for i in $nfslinks; do
 	if [ "$i" != "/nfs/data" ]; then
 		if [ ! -d $i ]; then
@@ -21,7 +21,6 @@ done
 
 mount -av
 
-#go through exports and make directory
 
 #all this should be moved to supervisord
 

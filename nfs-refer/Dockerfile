@@ -7,6 +7,6 @@ COPY ./bind-mount.sh /usr/local/bin
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-RUN rm /etc/exports
+RUN echo "" > /etc/exports
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
