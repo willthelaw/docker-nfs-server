@@ -6,6 +6,10 @@ FROM ubuntu:18.04
 # https://github.com/ehough/docker-nfs-server/pull/3#issuecomment-387880692
 ARG DEBIAN_FRONTEND=noninteractive
 
+#google cloud sdk for getting stuff
+# Create environment variable for correct distribution
+RUN apt-get update && apt-get -y install curl gpg && export CLOUD_SDK_REPO="cloud-sdk-bionic" && echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
 # kmod is needed for lsmod, and libcap2-bin is needed for confirming Linux capabilities
 RUN apt-get update                                                                && \
     apt-get -y dist-upgrade && \
