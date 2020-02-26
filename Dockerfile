@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y install curl gpg && export CLOUD_SDK_REPO="clou
 # kmod is needed for lsmod, and libcap2-bin is needed for confirming Linux capabilities
 RUN apt-get update                                                                && \
     apt-get -y dist-upgrade && \
-	    apt-get install -y --no-install-recommends net-tools dnsutils nfs-kernel-server kmod libcap2-bin
+	    apt-get install -y --no-install-recommends acl net-tools dnsutils nfs-kernel-server kmod libcap2-bin
 
 RUN apt-get install -y libnss-extrausers keyutils screen vim && apt-get clean                                          
                                                                                      

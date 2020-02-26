@@ -8,7 +8,7 @@ for i in $nfslinks; do
 	if [ "$i" != "/nfs/data" ]; then
 		if [ ! -d $i ]; then
 			echo "making directory"
-			mkdir $i
+			mkdir -p $i
 			echo "bind mounting directory"
 			mount -v -o bind $i $i
 		else

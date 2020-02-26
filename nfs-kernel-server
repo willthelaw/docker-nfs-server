@@ -33,3 +33,13 @@ NEED_SVCGSSD="no"
 
 # Options for rpc.svcgssd.
 RPCSVCGSSDOPTS=""
+
+#added for quicker resumes
+#default is 90
+##check after with
+#root@nfs:/# cat /proc/fs/nfsd/nfsv4gracetime
+#root@nfs:/# cat /proc/fs/nfsd/nfsv4leasetime
+#root@nfs:/# cat /proc/sys/fs/nfs/nlm_grace_period
+NFSD_V4_GRACE=10
+NFSD_V4_LEASE=10
+NLM_GRACE_PERIOD=10
